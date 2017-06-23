@@ -1,0 +1,24 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Alt-Svc demo #1</title>
+        <link rel="stylesheet" href="./reset.css">
+        <link rel="stylesheet" href="./styles.css">
+    </head>
+    <body>
+        <h1>
+            Alt-Svc demo #1
+        </h1>
+
+        <main>
+            <p>
+                This demo page has an Alt-Svc HTTP response header which will offer the secondary as an alternative. If you're using a recent Firefox, you should notice that at least some of the page assets are loaded from the secondary and also that either immediately or after a small delay, the poller output below will reflect that it too has switch to the secondary.
+            </p>
+            <output id="op"></output>
+        </main>
+
+        <script async defer src="./poller.js"></script>
+    </body>
+</html>
