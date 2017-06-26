@@ -36,7 +36,7 @@
                     let counter = 0;
 
             // Q: should this just execute recursively? i.e. as fast as possible, start again once the prev iter completes        
-                    setInterval(() =>
+                    let poller = setInterval(() =>
                     {
                         fetch("./server-info.json").then(function(response)
                         {
@@ -59,7 +59,7 @@
 
                         if(counter >= maxIterations)
                         {
-                            return;
+                            clearInterval(poller);
                         }
                         
                     }, pollIntervalMSec);
