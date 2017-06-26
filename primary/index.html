@@ -23,7 +23,8 @@
             (function()
             {
                 // Config
-                const pollIntervalMSec = 50;
+                const pollIntervalMSec = 25;
+                const maxIterations = 50;
 
                 // Get the output element
                 const op = document.querySelector("#op");
@@ -55,6 +56,11 @@
                         });
 
                         counter++;
+
+                        if(counter >= maxIterations)
+                        {
+                            return;
+                        }
                         
                     }, pollIntervalMSec);
                 }
