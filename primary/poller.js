@@ -1,5 +1,8 @@
 (function()
 {
+    // Config
+    const pollIntervalMSec = 50;
+
     // Get the output element
     const op = document.querySelector("#op");
 
@@ -12,8 +15,6 @@
 // Q: should this just execute recursively? i.e. as fast as possible, start again once the prev iter completes        
         setInterval(() =>
         {
-            // op.innerHTML += `#${counter} &lt;res string&gt;<br/>`;
-
             fetch("./server-info.json").then(function(response)
             {
                 if(response.ok)
@@ -32,7 +33,8 @@
             });
 
             counter++;
-        }, 50);
+            
+        }, pollIntervalMSec);
     }
     else
     {
