@@ -1,0 +1,29 @@
+body
+{
+    font: 100 95% helvetica,arial,sans-serif;
+    padding: 1rem;
+    background: #fff;
+    color: #494949;
+}
+
+h1
+{
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+    color: #0f0;
+}
+
+main 
+{
+    max-width: 60em;
+}
+p
+{
+    margin-bottom: 1em;
+}
+
+output
+{
+    padding: 0;
+    font-family: Courier New, Courier, monospace;
+}
