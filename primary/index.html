@@ -34,6 +34,7 @@
                     op.innerHTML = "";
 
                     let counter = 0;
+                    const startTime = new Date().getTime();
 
             // Q: should this just execute recursively? i.e. as fast as possible, start again once the prev iter completes        
                     let poller = setInterval(() =>
@@ -44,7 +45,10 @@
                             {
                                 response.json().then(function(json)
                                 {
-                                    op.innerHTML += `#${counter} ${json.name}<br/>`;
+                                    const nowTime = new Date().getTime();
+                                    const tDiff = nowTime - startTime;
+
+                                    op.innerHTML += `#${counter} @ ${tDiff}ms ${json.name}<br/>`;
                                 }).catch(function(error)
                                 {
                                     console.error(`Argh!: ${error.message}`);
