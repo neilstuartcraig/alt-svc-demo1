@@ -19,7 +19,7 @@
             <output id="op"></output>
         </main>
 
-        <script>
+         <script>
             (function()
             {
                 // Config
@@ -43,25 +43,38 @@
                         fetch(url).then( (res) => 
                         {
                             c++;
-// console.log(JSON.stringify(res, null, 2));
-                            op.innerHTML += res.json();
 
-                            if(c <= 5)
+                            if(res.ok)
                             {
-                                const endTime = new Date().getTime();
-
-                                const tDiff = endTime - startTime;
-
-                                let delay = 0; // This'll stay at 0 if the delay was longer than this value, else:
-                                if(tDiff < minIterationDelay)
+                                res.json().then(function(json)
                                 {
-                                    delay = minIterationDelay - tDiff;
-                                }
+                                    op.innerHTML += `${json} <br />`;
 
-                                setTimeout(() => 
+                                    if(c <= 5)
+                                    {
+                                        const endTime = new Date().getTime();
+
+                                        const tDiff = endTime - startTime;
+
+                                        let delay = 0; // This'll stay at 0 if the delay was longer than this value, else:
+                                        if(tDiff < minIterationDelay)
+                                        {
+                                            delay = minIterationDelay - tDiff;
+                                        }
+
+                                        setTimeout(() => 
+                                        {
+                                            getData(url);
+                                        }, delay);
+                                    }
+                                }).catch(function(error)
                                 {
-                                    getData(url);
-                                }, delay);
+                                    console.error(`Error reading JSON: ${error.message}`);
+                                });
+                            }
+                            else
+                            {
+                                op.innerHTML += `Error getting response JSON`;
                             }
 
                         }).catch( (err) => 
