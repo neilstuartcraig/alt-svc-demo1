@@ -43,7 +43,7 @@
                         fetch(url).then( (res) => 
                         {
                             c++;
-console.dir(res.json());
+console.log(JSON.stringify(res, null, 2));
                             op.innerHTML = res.body;
 
                             if(c <= 5)
