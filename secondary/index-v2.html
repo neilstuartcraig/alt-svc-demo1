@@ -19,7 +19,7 @@
             <output id="op"></output>
         </main>
 
-         <script>
+        <script>
             (function()
             {
                 // Config
@@ -31,7 +31,7 @@
 
                 if(op)
                 {
-                    const minIterationDelay = 5000; // microsec
+                    const minIterationDelay = 10; // ms
                     let c = 0;
 
                     op.innerHTML = "";
@@ -48,13 +48,15 @@
                             {
                                 res.json().then(function(json)
                                 {
-                                    op.innerHTML += `${json.name} <br />`;
-
-                                    if(c <= 5)
+                                    if(c <= maxIterations)
                                     {
                                         const endTime = new Date().getTime();
 
                                         const tDiff = endTime - startTime;
+
+
+                                        op.innerHTML += `#${c} @ ${tDiff}ms ${json.name}<br/>`;
+
 
                                         let delay = 0; // This'll stay at 0 if the delay was longer than this value, else:
                                         if(tDiff < minIterationDelay)
