@@ -1,0 +1,78 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Alt-Svc demo #1 - secondary</title>
+        <link rel="stylesheet" href="./reset.css">
+        <link rel="stylesheet" href="./styles.css">
+    </head>
+    <body>
+        <h1>
+            Alt-Svc demo #1 - Secondary
+        </h1>
+
+        <main>
+            <p>
+                This demo page has an Alt-Svc HTTP response header which will offer the secondary as an alternative. If you're using a recent Firefox, you should notice that at least some of the page assets are loaded from the secondary and also that either immediately or after a small delay, the poller output below will reflect that it too has switch to the secondary.
+            </p>
+            <output id="op"></output>
+        </main>
+
+        <script>
+            (function()
+            {
+                // Config
+                const pollIntervalMSec = 25;
+                const maxIterations = 25;
+
+                // Get the output element
+                const op = document.querySelector("#op");
+
+                if(op)
+                {
+                    op.innerHTML = "";
+
+                    function getData(url)
+                    {
+                        const startTime = new Date().getTime();
+
+                        fetch(url).then( (res) => 
+                        {
+                            c++;
+
+                            if(c <= 5)
+                            {
+                                const endTime = new Date().getTime();
+
+                                const tDiff = endTime - startTime;
+
+                                let delay = 0; // This'll stay at 0 if the delay was longer than this value, else:
+                                if(tDiff < minIterationDelay)
+                                {
+                                    delay = minIterationDelay - tDiff;
+                                }
+
+                                setTimeout(() => 
+                                {
+                                    getData(url);
+                                }, delay);
+                            }
+
+                        }).catch( (err) => 
+                        {
+                            console.log(`rej: ${err.message}`);
+                        });
+                    }
+
+                    getData("./server-info.json");
+
+                }
+                else
+                {
+                    console.error("Couldn't find the output element!");
+                }
+            })();
+        </script>
+    </body>
+</html>
