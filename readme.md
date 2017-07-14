@@ -1,6 +1,6 @@
 # Alt-Svc demo \#1
 
-This is a simple demo of load balancing HTTP requests using [Alt-Avc](https://tools.ietf.org/html/rfc7838). 
+This is a simple demo of load balancing HTTP requests using [Alt-Svc](https://tools.ietf.org/html/rfc7838). 
 
 ## Status
 This is a quick and dirty demo - no finesse whatsoever. You're free to use it as per the license terms but you might experience some pain. If it's useful and if time permits, i'll tidy this up and make it simpler to use.
